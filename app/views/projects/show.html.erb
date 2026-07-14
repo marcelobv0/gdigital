@@ -1,0 +1,63 @@
+<% content_for :title, @project.title %>
+
+<div class="page-header">
+  <h1><%= @project.title %></h1>
+  <div class="actions">
+    <%= link_to "Editar", edit_project_path(@project), class: "btn" %>
+    <%= button_to "Eliminar", @project, method: :delete, class: "btn btn-danger",
+                  data: { turbo_confirm: "¿Eliminar el proyecto #{@project.title}? Esta acción no se puede deshacer." } %>
+    <%= link_to "Volver", projects_path, class: "btn" %>
+  </div>
+</div>
+
+<p><strong>Cliente:</strong> <%= link_to @project.client.name, @project.client %></p>
+<p><strong>Estado:</strong> <%= status_badge(@project) %></p>
+
+<div class="progress-section">
+  <div class="progress-label">
+    <strong>Avance</strong>
+    <span><%= @project.progress %>%</span>
+  </div>
+  <div class="progress-bar">
+    <div class="progress-bar-fill" style="width: <%= @project.progress %>%"></div>
+  </div>
+  <p class="progress-meta">
+    <%= @project.completed_tasks_count %> de <%= @project.total_tasks_count %> tareas completadas
+  </p>
+</div>
+
+<div class="tasks-section">
+  <h2>Tareas</h2>
+
+  <%= form_with model: [@project, Task.new], class: "task-form" do |form| %>
+    <%= form.text_field :title, placeholder: "Nueva tarea", required: true %>
+    <%= form.date_field :due_date %>
+    <%= form.submit "Agregar tarea", class: "btn btn-primary btn-sm" %>
+  <% end %>
+
+  <% tasks = sorted_tasks(@project) %>
+  <% if tasks.any? %>
+    <ul class="task-list">
+      <% tasks.each do |task| %>
+        <li class="task-item <%= "task-overdue" if task.overdue? %>">
+          <%= form_with model: [@project, task], method: :patch, class: "task-toggle",
+                        data: { controller: "auto-submit" } do |form| %>
+            <%= form.check_box :done,
+                  id: dom_id(task, :done),
+                  aria: { label: "Marcar tarea como completada: #{task.title}" },
+                  data: { action: "change->auto-submit#submit" } %>
+          <% end %>
+          <span class="task-title <%= "task-done" if task.done? %>"><%= task.title %></span>
+          <% if task.due_date %>
+            <span class="task-due-date">
+              <%= l(task.due_date, format: :long) %>
+              <% if task.overdue? %> · <span class="overdue-tag">Vencida</span><% end %>
+            </span>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="empty-state">Todavía no hay tareas para este proyecto.</p>
+  <% end %>
+</div>

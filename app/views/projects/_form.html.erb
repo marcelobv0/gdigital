@@ -1,0 +1,31 @@
+<%= form_with model: project, class: "form" do |form| %>
+  <% if project.errors.any? %>
+    <div class="form-errors">
+      <h2><%= pluralize(project.errors.count, "error") %> impidieron guardar este proyecto:</h2>
+      <ul>
+        <% project.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :client_id %>
+    <%= form.collection_select :client_id, Client.order(:name), :id, :name, prompt: "Seleccioná un cliente" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.select :status, Project.statuses.keys.map { |s| [t("project_statuses.#{s}"), s] } %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

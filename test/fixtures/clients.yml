@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+acme:
+  name: Acme Inc
+  email: hello@acme.test
+
+globex:
+  name: Globex Corporation
+  email: contact@globex.test
