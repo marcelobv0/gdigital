@@ -25,3 +25,35 @@
     <%= @project.completed_tasks_count %> de <%= @project.total_tasks_count %> tareas completadas
   </p>
 </div>
+
+<div class="tasks-section">
+  <h2>Tareas</h2>
+
+  <%= form_with model: [@project, Task.new], class: "task-form" do |form| %>
+    <%= form.text_field :title, placeholder: "Nueva tarea", required: true %>
+    <%= form.date_field :due_date %>
+    <%= form.submit "Agregar tarea", class: "btn btn-primary btn-sm" %>
+  <% end %>
+
+  <% tasks = sorted_tasks(@project) %>
+  <% if tasks.any? %>
+    <ul class="task-list">
+      <% tasks.each do |task| %>
+        <li class="task-item <%= "task-overdue" if task.overdue? %>">
+          <%= form_with model: [@project, task], method: :patch, class: "task-toggle" do |form| %>
+            <%= form.check_box :done, onchange: "this.form.requestSubmit()" %>
+          <% end %>
+          <span class="task-title <%= "task-done" if task.done? %>"><%= task.title %></span>
+          <% if task.due_date %>
+            <span class="task-due-date">
+              <%= l(task.due_date, format: :long) %>
+              <% if task.overdue? %> · <span class="overdue-tag">Vencida</span><% end %>
+            </span>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="empty-state">Todavía no hay tareas para este proyecto.</p>
+  <% end %>
+</div>
