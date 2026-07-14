@@ -40,8 +40,12 @@
     <ul class="task-list">
       <% tasks.each do |task| %>
         <li class="task-item <%= "task-overdue" if task.overdue? %>">
-          <%= form_with model: [@project, task], method: :patch, class: "task-toggle" do |form| %>
-            <%= form.check_box :done, onchange: "this.form.requestSubmit()" %>
+          <%= form_with model: [@project, task], method: :patch, class: "task-toggle",
+                        data: { controller: "auto-submit" } do |form| %>
+            <%= form.check_box :done,
+                  id: dom_id(task, :done),
+                  aria: { label: "Marcar tarea como completada: #{task.title}" },
+                  data: { action: "change->auto-submit#submit" } %>
           <% end %>
           <span class="task-title <%= "task-done" if task.done? %>"><%= task.title %></span>
           <% if task.due_date %>
