@@ -1,13 +1,20 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# website ends up with 1 of 3 tasks done => progress 33%, and 1 overdue task.
 
-one:
-  title: MyString
-  done: false
-  due_date: 2026-07-13
-  project: one
+design:
+  title: Design mockups
+  done: true
+  due_date: <%= 5.days.ago.to_date %>
+  project: website
 
-two:
-  title: MyString
+build:
+  title: Build homepage
   done: false
-  due_date: 2026-07-13
-  project: two
+  due_date: <%= 5.days.from_now.to_date %>
+  project: website
+
+overdue_task:
+  title: Fix critical bug
+  done: false
+  due_date: <%= 3.days.ago.to_date %>
+  project: website

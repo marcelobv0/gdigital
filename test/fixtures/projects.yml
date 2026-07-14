@@ -1,11 +1,18 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  status: MyString
-  client: one
+# acme has an ACTIVE project -> acme cannot be destroyed.
+website:
+  title: Website Redesign
+  status: active
+  client: acme
 
-two:
-  title: MyString
-  status: MyString
-  client: two
+# globex only has non-active projects -> globex can be destroyed.
+migration:
+  title: Data Migration
+  status: completed
+  client: globex
+
+paused_app:
+  title: Mobile App
+  status: paused
+  client: globex
