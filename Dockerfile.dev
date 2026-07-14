@@ -1,0 +1,35 @@
+# syntax=docker/dockerfile:1
+
+# Development image — optimized for "clone and run", not production.
+# For a production build (Kamal-ready, precompiled assets, non-root), use ./Dockerfile.
+#
+#   docker compose up --build      # build + boot at http://localhost:3000 (seeded on first run)
+
+# Keep RUBY_VERSION in sync with .ruby-version
+ARG RUBY_VERSION=4.0.5
+FROM docker.io/library/ruby:$RUBY_VERSION-slim
+
+WORKDIR /rails
+
+# Packages: toolchain for native gems, git (bundler), curl (healthcheck), sqlite runtime.
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y \
+      build-essential git curl libyaml-dev pkg-config sqlite3 && \
+    rm -rf /var/lib/apt/lists/*
+
+# Full development environment: all gem groups (debug, web-console, capybara, rubocop, ...).
+ENV RAILS_ENV="development" \
+    BUNDLE_PATH="/usr/local/bundle"
+
+# Install gems first so this layer is cached unless the Gemfile changes.
+COPY Gemfile Gemfile.lock ./
+RUN bundle install
+
+# Copy the rest of the application.
+COPY . .
+
+EXPOSE 3000
+
+# On first boot `db:prepare` creates + migrates + seeds the SQLite database
+# (kept on a named volume); on later boots it just applies pending migrations.
+CMD ["bash", "-c", "rm -f tmp/pids/server.pid && ./bin/rails db:prepare && ./bin/rails server -b 0.0.0.0 -p 3000"]
