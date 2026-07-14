@@ -48,6 +48,12 @@ bin/rails server         # levanta la app en http://localhost:3000
 bin/rails test          
 ```
 
+O dentro del contenedor sin instalar Ruby localmente:
+
+```bash
+docker compose run --rm web bin/rails test
+```
+
 Chequeos de calidad adicionales:
 
 ```bash
