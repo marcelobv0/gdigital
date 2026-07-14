@@ -8,3 +8,172 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+:root {
+  --color-bg: #f7f7f9;
+  --color-surface: #ffffff;
+  --color-border: #e2e2e7;
+  --color-text: #1f2430;
+  --color-text-muted: #6b7280;
+  --color-primary: #3457d5;
+  --color-primary-hover: #2943ab;
+  --color-danger: #c0392b;
+  --color-danger-hover: #992d22;
+  --color-success-bg: #e6f6ec;
+  --color-success-text: #1e7a3d;
+  --color-alert-bg: #fdecea;
+  --color-alert-text: #b3261e;
+  --radius: 8px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+a { color: var(--color-primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.site-header {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--color-text);
+}
+
+.site-header nav a {
+  margin-left: 1.25rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.site-header nav a:hover { color: var(--color-primary); }
+
+main.container { padding-top: 2rem; padding-bottom: 3rem; }
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+.page-header h1 { margin: 0; }
+
+.flash {
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.flash-notice { background: var(--color-success-bg); color: var(--color-success-text); }
+.flash-alert { background: var(--color-alert-bg); color: var(--color-alert-text); }
+
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.btn:hover { text-decoration: none; background: var(--color-bg); }
+
+.btn-primary { background: var(--color-primary); border-color: var(--color-primary); color: #fff; }
+.btn-primary:hover { background: var(--color-primary-hover); border-color: var(--color-primary-hover); }
+
+.btn-danger { background: var(--color-danger); border-color: var(--color-danger); color: #fff; }
+.btn-danger:hover { background: var(--color-danger-hover); border-color: var(--color-danger-hover); }
+
+.btn-sm { padding: 0.3rem 0.7rem; font-size: 0.8rem; }
+
+table.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+table.table th, table.table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+table.table th {
+  background: var(--color-bg);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-text-muted);
+}
+
+table.table tbody tr:last-child td { border-bottom: none; }
+
+td.actions, th.actions { text-align: right; white-space: nowrap; }
+td.actions > a { margin-left: 0.5rem; }
+form.button_to { display: inline-block; margin-left: 0.5rem; }
+
+.empty-state { color: var(--color-text-muted); font-style: italic; padding: 1.5rem 0; }
+
+.form {
+  max-width: 480px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+
+.field { margin-bottom: 1.25rem; display: flex; flex-direction: column; gap: 0.4rem; }
+.field label { font-weight: 600; font-size: 0.9rem; }
+.field input, .field select {
+  padding: 0.5rem 0.6rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.form-errors {
+  background: var(--color-alert-bg);
+  color: var(--color-alert-text);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-errors h2 { margin: 0 0 0.5rem; font-size: 1rem; }
+.form-errors ul { margin: 0; padding-left: 1.25rem; }
+
+.actions { display: flex; gap: 0.5rem; align-items: center; }

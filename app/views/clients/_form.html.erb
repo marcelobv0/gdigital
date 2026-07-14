@@ -1,0 +1,26 @@
+<%= form_with model: client, class: "form" do |form| %>
+  <% if client.errors.any? %>
+    <div class="form-errors">
+      <h2><%= pluralize(client.errors.count, "error") %> impidieron guardar este cliente:</h2>
+      <ul>
+        <% client.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.email_field :email %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

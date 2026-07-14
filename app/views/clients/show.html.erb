@@ -1,0 +1,24 @@
+<% content_for :title, @client.name %>
+
+<div class="page-header">
+  <h1><%= @client.name %></h1>
+  <div class="actions">
+    <%= link_to "Editar", edit_client_path(@client), class: "btn" %>
+    <%= button_to "Eliminar", @client, method: :delete, class: "btn btn-danger",
+                  data: { turbo_confirm: "¿Eliminar a #{@client.name}? Esta acción no se puede deshacer." } %>
+    <%= link_to "Volver", clients_path, class: "btn" %>
+  </div>
+</div>
+
+<p><strong>Email:</strong> <%= @client.email %></p>
+
+<h2>Proyectos</h2>
+<% if @client.projects.any? %>
+  <ul>
+    <% @client.projects.each do |project| %>
+      <li><%= project.title %> — <%= t("project_statuses.#{project.status}") %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p class="empty-state">Este cliente todavía no tiene proyectos.</p>
+<% end %>
