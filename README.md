@@ -18,7 +18,7 @@ de cada proyecto, con seguimiento de avance y reglas de negocio del dominio.
 
 ### Con Docker
 
-Requiere  Docker. Un comando construye la imagen, prepara la base con datos de
+Requiere Docker. Un comando construye la imagen, prepara la base con datos de
 ejemplo y levanta la app en http://localhost:3000:
 
 ```bash
