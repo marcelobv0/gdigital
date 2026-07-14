@@ -14,6 +14,8 @@ gem "importmap-rails"
 gem "turbo-rails"
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
+# Locale data (pluralization, ActiveRecord/ActiveModel error messages, etc.) [https://github.com/svenfuchs/rails-i18n]
+gem "rails-i18n"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 # Use Redis adapter to run Action Cable in production

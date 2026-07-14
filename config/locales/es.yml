@@ -1,0 +1,35 @@
+es:
+  activerecord:
+    models:
+      client: Cliente
+      project: Proyecto
+      task: Tarea
+    attributes:
+      client:
+        name: Nombre
+        email: Email
+      project:
+        title: Título
+        status: Estado
+        client: Cliente
+      task:
+        title: Título
+        done: Hecha
+        due_date: Fecha límite
+        project: Proyecto
+    errors:
+      models:
+        client:
+          attributes:
+            base:
+              active_projects_exist: "No se puede eliminar un cliente con proyectos activos"
+
+  project_statuses:
+    active: Activo
+    paused: Pausado
+    completed: Completado
+
+  helpers:
+    submit:
+      create: "Crear %{model}"
+      update: "Actualizar %{model}"

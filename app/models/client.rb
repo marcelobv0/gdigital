@@ -18,7 +18,7 @@ class Client < ApplicationRecord
   def ensure_no_active_projects
     return unless projects.active.exists?
 
-    errors.add(:base, "Cannot delete a client with active projects")
+    errors.add(:base, :active_projects_exist)
     throw :abort
   end
 end

@@ -8,7 +8,7 @@ class ProjectTest < ActiveSupport::TestCase
   test "requires a title" do
     project = Project.new(status: "active", client: clients(:acme))
     assert_not project.valid?
-    assert_includes project.errors[:title], "can't be blank"
+    assert_includes project.errors[:title], "no puede estar en blanco"
   end
 
   test "requires a client" do

@@ -8,25 +8,25 @@ class ClientTest < ActiveSupport::TestCase
   test "requires a name" do
     client = Client.new(email: "new@example.com")
     assert_not client.valid?
-    assert_includes client.errors[:name], "can't be blank"
+    assert_includes client.errors[:name], "no puede estar en blanco"
   end
 
   test "requires an email" do
     client = Client.new(name: "No Email")
     assert_not client.valid?
-    assert_includes client.errors[:email], "can't be blank"
+    assert_includes client.errors[:email], "no puede estar en blanco"
   end
 
   test "rejects a malformed email" do
     client = Client.new(name: "Bad Email", email: "not-an-email")
     assert_not client.valid?
-    assert_includes client.errors[:email], "is invalid"
+    assert_includes client.errors[:email], "no es válido"
   end
 
   test "normalizes and enforces case-insensitive email uniqueness" do
     duplicate = Client.new(name: "Dupe", email: clients(:acme).email.upcase)
     assert_not duplicate.valid?
-    assert_includes duplicate.errors[:email], "has already been taken"
+    assert_includes duplicate.errors[:email], "ya está en uso"
   end
 
   test "cannot be destroyed while it has active projects" do
@@ -36,7 +36,7 @@ class ClientTest < ActiveSupport::TestCase
     assert_no_difference "Client.count" do
       assert_not client.destroy
     end
-    assert_includes client.errors[:base], "Cannot delete a client with active projects"
+    assert_includes client.errors[:base], "No se puede eliminar un cliente con proyectos activos"
   end
 
   test "can be destroyed when it has no active projects" do

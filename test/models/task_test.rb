@@ -8,7 +8,7 @@ class TaskTest < ActiveSupport::TestCase
   test "requires a title" do
     task = Task.new(project: projects(:website))
     assert_not task.valid?
-    assert_includes task.errors[:title], "can't be blank"
+    assert_includes task.errors[:title], "no puede estar en blanco"
   end
 
   test "requires a project" do
