@@ -1,0 +1,27 @@
+<% content_for :title, @project.title %>
+
+<div class="page-header">
+  <h1><%= @project.title %></h1>
+  <div class="actions">
+    <%= link_to "Editar", edit_project_path(@project), class: "btn" %>
+    <%= button_to "Eliminar", @project, method: :delete, class: "btn btn-danger",
+                  data: { turbo_confirm: "¿Eliminar el proyecto #{@project.title}? Esta acción no se puede deshacer." } %>
+    <%= link_to "Volver", projects_path, class: "btn" %>
+  </div>
+</div>
+
+<p><strong>Cliente:</strong> <%= link_to @project.client.name, @project.client %></p>
+<p><strong>Estado:</strong> <%= status_badge(@project) %></p>
+
+<div class="progress-section">
+  <div class="progress-label">
+    <strong>Avance</strong>
+    <span><%= @project.progress %>%</span>
+  </div>
+  <div class="progress-bar">
+    <div class="progress-bar-fill" style="width: <%= @project.progress %>%"></div>
+  </div>
+  <p class="progress-meta">
+    <%= @project.completed_tasks_count %> de <%= @project.total_tasks_count %> tareas completadas
+  </p>
+</div>

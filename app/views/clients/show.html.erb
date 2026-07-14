@@ -16,7 +16,7 @@
 <% if @client.projects.any? %>
   <ul>
     <% @client.projects.each do |project| %>
-      <li><%= project.title %> — <%= t("project_statuses.#{project.status}") %></li>
+      <li><%= link_to project.title, project %> — <%= status_badge(project) %></li>
     <% end %>
   </ul>
 <% else %>

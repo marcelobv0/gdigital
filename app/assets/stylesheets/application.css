@@ -177,3 +177,67 @@ form.button_to { display: inline-block; margin-left: 0.5rem; }
 .form-errors ul { margin: 0; padding-left: 1.25rem; }
 
 .actions { display: flex; gap: 0.5rem; align-items: center; }
+
+.filter-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-tab {
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.filter-tab:hover { text-decoration: none; color: var(--color-primary); }
+
+.filter-tab.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.badge-active { background: var(--color-success-bg); color: var(--color-success-text); }
+.badge-paused { background: #fff3cd; color: #8a6300; }
+.badge-completed { background: #e5e7eb; color: #374151; }
+
+.progress-section { max-width: 480px; margin-top: 1.5rem; }
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+}
+
+.progress-bar {
+  background: var(--color-border);
+  border-radius: 999px;
+  height: 10px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  background: var(--color-primary);
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.2s ease;
+}
+
+.progress-meta { color: var(--color-text-muted); font-size: 0.85rem; margin-top: 0.4rem; }

@@ -8,12 +8,19 @@ class Project < ApplicationRecord
   validates :title, presence: true
   validates :status, presence: true
 
+  def total_tasks_count
+    tasks.size
+  end
+
+  def completed_tasks_count
+    tasks.count(&:done?)
+  end
+
   # Completion percentage (integer 0–100) based on done vs. total tasks.
   # Counts in Ruby so an eager-loaded `tasks` association adds no queries.
   def progress
-    total = tasks.size
-    return 0 if total.zero?
+    return 0 if total_tasks_count.zero?
 
-    ((tasks.count(&:done?).to_f / total) * 100).round
+    ((completed_tasks_count.to_f / total_tasks_count) * 100).round
   end
 end

@@ -12,6 +12,7 @@ es:
         title: Título
         status: Estado
         client: Cliente
+        client_id: Cliente
       task:
         title: Título
         done: Hecha
